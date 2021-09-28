@@ -1,4 +1,4 @@
-# movue-it-nuxt
+# movue-it-nuxt2
 
 ## Build Setup
 
