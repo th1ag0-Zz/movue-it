@@ -8,6 +8,8 @@ module.exports = {
 	plugins: [],
 	// add your custom rules here
 	rules: {
+		'no-multiple-empty-lines': ['error', { max: 2, maxEOF: 0 }],
+		'import/named': false,
 		'comma-dangle': ['error', 'always-multiline'],
 		'import/first': 'off',
 		'import/order': 'off',
