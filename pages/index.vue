@@ -23,19 +23,29 @@
 				Iniciar ciclo
 			</button>
 		</div>
+
+		<Card id="challenge" class="w-full lg:w-1/2" />
 	</section>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import { mapState, mapMutations } from 'vuex';
 
+import { mapState, mapGetters, mapMutations } from 'vuex';
 import { Mutations as CountdownMT } from '~/store/Countdown/types';
+import { Mutations as ChallengesMT } from '~/store/Challenges/types';
+
 import CompletedChallenges from '~/components/atoms/CompletedChallenges.vue';
 import Profile from '~/components/molecules/Profile.vue';
 import Countdown from '~/components/molecules/Countdown.vue';
+import Card from '~/components/organisms/Card.vue';
 
-import { playAudio, sendNotification } from '~/utils';
+import {
+	playAudio,
+	sendNotification,
+	getRamdomNumber,
+	scrollToElement,
+} from '~/utils';
 
 export default Vue.extend({
 	head() {
@@ -54,6 +64,7 @@ export default Vue.extend({
 		CompletedChallenges,
 		Profile,
 		Countdown,
+		Card,
 	},
 
 	computed: {
@@ -61,19 +72,24 @@ export default Vue.extend({
 			hasCountdownCompleted: 'hasCompleted',
 			isCountdownActive: 'isActive',
 		}),
+
+		...mapGetters('Challenges', ['challengesLength']),
 	},
 
 	methods: {
 		...mapMutations({
 			setCountdownHasCompleted: `Countdown/${CountdownMT.SET_HAS_COMPLETED}`,
 			setCountdownIsActive: `Countdown/${CountdownMT.SET_IS_ACTIVE}`,
+			setCurrentChallengeIndex: `Challenges/${ChallengesMT.SET_CURRENT_CHALLENGE_INDEX}`,
 		}),
 		setCountdownState(flag: boolean) {
 			this.setCountdownHasCompleted(false);
 			this.setCountdownIsActive(flag);
 		},
 		getNewChallenge() {
+			const index = getRamdomNumber(0, this.challengesLength);
 			this.setCountdownHasCompleted(true);
+			this.setCurrentChallengeIndex(index);
 
 			if (Notification?.permission === 'granted') {
 				playAudio('/notification.mp3');
@@ -82,6 +98,10 @@ export default Vue.extend({
 					icon: '/favicon.png',
 				});
 			}
+
+			this.$nextTick(() => {
+				scrollToElement('#challenge');
+			});
 		},
 	},
 });

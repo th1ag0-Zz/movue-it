@@ -93,7 +93,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 </a>
 <br />
 
-[![Linkedin Badge](https://img.shields.io/badge/-MaiattoDev-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/rafaelmaiach/)](https://www.linkedin.com/in/rafaelmaiach/)
+[![Linkedin Badge](https://img.shields.io/badge/-Thiago%20Silva-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/rafaelmaiach/)](https://www.linkedin.com/in/thiago-furtado/)
 
 ---
 
